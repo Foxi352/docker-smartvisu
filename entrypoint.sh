@@ -13,6 +13,10 @@ chown -R nginx:www-data /var/www/html
 chmod g+w /var/www/html
 chmod g+w /var/www/html/temp
 
+if [ -f /var/www/html/config.ini ]; then
+    chown www-data:www-data /var/www/html/config.ini
+fi
+
 if [ ! -z "$SHNG_PHP_CONTAINER" ]; then
     sed -i "s/fastcgi_pass.*/fastcgi_pass $SHNG_PHP_CONTAINER:9000;/g" /etc/nginx/conf.d/default.conf
 fi
